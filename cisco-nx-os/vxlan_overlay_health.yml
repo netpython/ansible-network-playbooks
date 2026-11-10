@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Vxlan overlay health
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vxlan_overlay_health
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show nve peers
+    - show nve vni
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

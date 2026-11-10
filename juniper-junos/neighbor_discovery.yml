@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Neighbor discovery
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: neighbor_discovery
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show lldp neighbors detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

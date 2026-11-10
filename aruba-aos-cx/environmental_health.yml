@@ -1,0 +1,15 @@
+---
+- name: Aruba AOS-CX | Environmental health
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: environmental_health
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show environment fan
+    - show environment power-supply
+    - show environment temperature
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,13 @@
+---
+- name: Cisco NX-OS | Mac learning
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: mac_learning
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show mac address-table dynamic
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

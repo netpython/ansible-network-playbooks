@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Optics review
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: optics_review
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show interface transceiver detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

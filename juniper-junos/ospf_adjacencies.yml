@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Ospf adjacencies
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ospf_adjacencies
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show ospf neighbor detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

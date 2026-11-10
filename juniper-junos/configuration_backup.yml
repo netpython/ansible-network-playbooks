@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Configuration backup
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: configuration_backup
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show configuration
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

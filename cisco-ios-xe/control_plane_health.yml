@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS XE | Control plane health
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: control_plane_health
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show platform software status control-processor brief
+    - show processes cpu platform sorted
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

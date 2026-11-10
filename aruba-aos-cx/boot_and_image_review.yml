@@ -1,0 +1,14 @@
+---
+- name: Aruba AOS-CX | Boot and image review
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: boot_and_image_review
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show images
+    - show boot-history
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

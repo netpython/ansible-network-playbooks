@@ -1,0 +1,19 @@
+---
+- name: Run the Check Point management query
+  ansible.builtin.include_tasks: "checkpoint/{{ workflow_query }}.yml"
+
+- name: Verify the management server was reachable
+  ansible.builtin.assert:
+    that:
+      - not (vendor_result.unreachable | default(false))
+    quiet: true
+  no_log: true
+
+- name: Retain the reported management facts
+  ansible.builtin.set_fact:
+    workflow_payload: >-
+      {{ vendor_result.ansible_facts
+         | default(vendor_result | dict2items
+                   | rejectattr('key', 'in', ['invocation', 'changed', 'failed', 'warnings', 'deprecations'])
+                   | list | items2dict) }}
+  no_log: true

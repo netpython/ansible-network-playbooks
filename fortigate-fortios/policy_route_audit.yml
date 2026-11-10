@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Policy route audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: policy_route_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - router_policy
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

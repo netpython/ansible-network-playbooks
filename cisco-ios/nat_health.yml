@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Nat health
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: nat_health
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show ip nat statistics
+    - show ip nat translations
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

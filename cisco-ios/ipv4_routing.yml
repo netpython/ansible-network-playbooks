@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Ipv4 routing
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ipv4_routing
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show ip route
+    - show ip protocols
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

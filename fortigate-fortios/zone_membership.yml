@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Zone membership
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: zone_membership
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - system_zone
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

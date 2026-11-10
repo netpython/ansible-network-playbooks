@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Chassis inventory
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: chassis_inventory
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show version
+    - show chassis hardware
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

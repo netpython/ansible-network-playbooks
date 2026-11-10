@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS XE | Physical error triage
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: physical_error_triage
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show interfaces status
+    - show interfaces counters errors
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

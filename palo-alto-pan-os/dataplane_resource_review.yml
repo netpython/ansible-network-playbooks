@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Dataplane resource review
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: dataplane_resource_review
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show running resource-monitor
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

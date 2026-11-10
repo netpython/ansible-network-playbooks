@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS XE | Poe capacity
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: poe_capacity
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show power inline
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

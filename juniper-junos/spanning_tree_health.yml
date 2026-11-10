@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Spanning tree health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: spanning_tree_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show spanning-tree bridge
+    - show spanning-tree interface
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

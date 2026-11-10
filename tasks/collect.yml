@@ -1,0 +1,74 @@
+---
+- name: Skip collection during check mode
+  ansible.builtin.meta: end_host
+  when: ansible_check_mode
+
+- name: Validate collector parameters
+  ansible.builtin.assert:
+    that:
+      - workflow_id is match('^[a-z0-9_]+$')
+      - workflow_platform is match('^[a-z0-9-]+$')
+      - inventory_hostname is match('^[A-Za-z0-9_.-]+$')
+      - inventory_hostname not in ['.', '..']
+      - workflow_queries | length > 0
+    quiet: true
+
+- name: Create a private report root on the controller
+  ansible.builtin.file:
+    path: "{{ report_root | default(playbook_dir ~ '/../artifacts') }}"
+    state: directory
+    mode: '0700'
+  delegate_to: localhost
+  become: false
+
+- name: Create a unique report file on the controller
+  ansible.builtin.tempfile:
+    path: "{{ report_root | default(playbook_dir ~ '/../artifacts') }}"
+    state: file
+    prefix: "{{ workflow_platform }}-{{ workflow_id }}-{{ inventory_hostname }}-"
+    suffix: '.json'
+  delegate_to: localhost
+  become: false
+  register: report_file
+
+- name: Initialize query results
+  ansible.builtin.set_fact:
+    workflow_results: []
+    workflow_failures: []
+
+- name: Run one read-only query at a time
+  ansible.builtin.include_tasks: query.yml
+  loop: "{{ workflow_queries }}"
+  loop_control:
+    loop_var: workflow_query
+
+- name: Save results and collection failures
+  ansible.builtin.copy:
+    dest: "{{ report_file.path }}"
+    mode: '0600'
+    content: "{{ report_document | to_nice_json }}\n"
+  vars:
+    report_document:
+      schema: 1
+      platform: "{{ workflow_platform }}"
+      workflow: "{{ workflow_id }}"
+      device: "{{ inventory_hostname }}"
+      captured_at: "{{ now(utc=true, fmt='%Y-%m-%dT%H:%M:%SZ') }}"
+      status: "{{ 'partial' if workflow_failures else 'complete' }}"
+      results: "{{ workflow_results }}"
+      failures: "{{ workflow_failures }}"
+  delegate_to: localhost
+  become: false
+  diff: false
+  no_log: true
+
+- name: Print report path
+  ansible.builtin.debug:
+    msg: "{{ report_file.path }}"
+
+- name: Fail if any collection query was unsuccessful
+  ansible.builtin.assert:
+    that:
+      - workflow_failures | length == 0
+    fail_msg: "Collection incomplete. See {{ report_file.path }}."
+    quiet: true

@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Routing engine health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: routing_engine_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show chassis routing-engine
+    - show system processes extensive
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

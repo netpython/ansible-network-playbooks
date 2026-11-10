@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS XE | Catalyst punt triage
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: catalyst_punt_triage
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show platform software fed switch active punt cause summary
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Time object inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: time_object_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - time
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Alarm review
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: alarm_review
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show system alarms
+    - show chassis alarms
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

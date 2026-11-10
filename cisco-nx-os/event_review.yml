@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Event review
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: event_review
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show logging last 50
+    - show cores
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

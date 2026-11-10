@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Virtual chassis health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: virtual_chassis_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show virtual-chassis status
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

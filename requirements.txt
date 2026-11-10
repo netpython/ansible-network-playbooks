@@ -1,0 +1,4 @@
+ansible-core>=2.18,<2.20
+ansible-pylibssh
+ncclient
+pan-os-python

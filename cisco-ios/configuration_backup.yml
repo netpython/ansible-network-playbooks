@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS | Configuration backup
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: configuration_backup
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show running-config
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

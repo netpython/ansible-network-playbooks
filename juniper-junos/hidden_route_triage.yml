@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Hidden route triage
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: hidden_route_triage
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show route hidden extensive
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

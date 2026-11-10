@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Evpn route review
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: evpn_route_review
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show bgp l2vpn evpn summary
+    - show bgp l2vpn evpn route-type 2
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

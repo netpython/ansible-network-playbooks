@@ -1,0 +1,13 @@
+---
+- name: Cisco NX-OS | Vpc consistency
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vpc_consistency
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show vpc consistency-parameters global
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,15 @@
+---
+- name: Aruba AOS-CX | Clock and ntp
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: clock_and_ntp
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show clock
+    - show ntp status
+    - show ntp associations
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

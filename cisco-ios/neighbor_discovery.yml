@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Neighbor discovery
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: neighbor_discovery
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show cdp neighbors detail
+    - show lldp neighbors detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

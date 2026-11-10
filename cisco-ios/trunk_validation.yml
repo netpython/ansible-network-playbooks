@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Trunk validation
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: trunk_validation
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show interfaces trunk
+    - show vlan brief
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

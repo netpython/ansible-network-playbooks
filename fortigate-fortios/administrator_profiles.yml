@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Administrator profiles
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: administrator_profiles
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - system_accprofile
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS XE | Bgp peer review
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: bgp_peer_review
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show bgp ipv4 unicast summary
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

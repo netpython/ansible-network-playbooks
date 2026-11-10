@@ -1,0 +1,14 @@
+---
+- name: Palo Alto PAN-OS | Management plane health
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: management_plane_health
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show system resources
+    - show system disk-space
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

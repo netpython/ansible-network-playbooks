@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Service group inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: service_group_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - service_group
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

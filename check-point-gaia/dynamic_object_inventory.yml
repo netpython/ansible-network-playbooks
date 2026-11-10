@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Dynamic object inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: dynamic_object_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - dynamic_object
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

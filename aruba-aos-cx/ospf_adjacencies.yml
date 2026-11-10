@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Ospf adjacencies
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ospf_adjacencies
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show ip ospf neighbors
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

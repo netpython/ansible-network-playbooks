@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Clock and ntp
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: clock_and_ntp
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show clock detail
+    - show ntp associations
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

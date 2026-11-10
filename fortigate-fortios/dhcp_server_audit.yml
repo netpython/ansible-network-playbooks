@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Dhcp server audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: dhcp_server_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - system.dhcp_server
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

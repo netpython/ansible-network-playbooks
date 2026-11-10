@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Lacp health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: lacp_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show lacp interfaces
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

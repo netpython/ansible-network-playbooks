@@ -1,0 +1,14 @@
+---
+- name: Palo Alto PAN-OS | Arp and lldp
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: arp_and_lldp
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show arp all
+    - show lldp neighbors all
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

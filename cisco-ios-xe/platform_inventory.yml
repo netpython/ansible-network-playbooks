@@ -1,0 +1,15 @@
+---
+- name: Cisco IOS XE | Platform inventory
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: platform_inventory
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show version
+    - show platform
+    - show inventory
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

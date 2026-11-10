@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Bfd and hsrp
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: bfd_and_hsrp
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show bfd neighbors
+    - show hsrp brief
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

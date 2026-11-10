@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Vrf routing
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vrf_routing
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show vrf
+    - show ip route vrf all
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

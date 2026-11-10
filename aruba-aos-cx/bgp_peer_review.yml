@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Bgp peer review
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: bgp_peer_review
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show bgp ipv4 unicast summary
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

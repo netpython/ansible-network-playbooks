@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Panorama connectivity
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: panorama_connectivity
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show panorama-status
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

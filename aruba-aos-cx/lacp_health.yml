@@ -1,0 +1,14 @@
+---
+- name: Aruba AOS-CX | Lacp health
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: lacp_health
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show lacp interfaces
+    - show lacp aggregates
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

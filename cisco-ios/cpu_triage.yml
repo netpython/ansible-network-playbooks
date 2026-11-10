@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS | Cpu triage
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: cpu_triage
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show processes cpu sorted
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

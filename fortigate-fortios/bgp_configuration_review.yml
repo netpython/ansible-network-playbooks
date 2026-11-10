@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Bgp configuration review
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: bgp_configuration_review
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - router_bgp
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

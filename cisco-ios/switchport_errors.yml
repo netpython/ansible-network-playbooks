@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Switchport errors
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: switchport_errors
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show interfaces status
+    - show interfaces counters errors
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Mac learning
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: mac_learning
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show mac-address-table
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

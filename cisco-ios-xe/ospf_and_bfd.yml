@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS XE | Ospf and bfd
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ospf_and_bfd
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show ip ospf neighbor
+    - show bfd neighbors details
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

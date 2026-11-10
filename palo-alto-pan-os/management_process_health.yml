@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Management process health
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: management_process_health
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show system software status
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

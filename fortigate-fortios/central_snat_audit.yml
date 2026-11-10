@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Central snat audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: central_snat_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - firewall_central-snat-map
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

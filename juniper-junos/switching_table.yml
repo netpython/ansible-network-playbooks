@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Switching table
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: switching_table
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show ethernet-switching table
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

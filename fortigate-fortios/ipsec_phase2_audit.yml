@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Ipsec phase2 audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ipsec_phase2_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - vpn.ipsec_phase2-interface
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

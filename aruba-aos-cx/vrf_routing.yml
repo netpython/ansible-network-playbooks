@@ -1,0 +1,14 @@
+---
+- name: Aruba AOS-CX | Vrf routing
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vrf_routing
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show vrf
+    - show ip route
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

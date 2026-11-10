@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Spanning tree health
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: spanning_tree_health
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show spanning-tree summary
+    - show spanning-tree inconsistentports
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

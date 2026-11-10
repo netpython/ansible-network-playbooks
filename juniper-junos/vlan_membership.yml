@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Vlan membership
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vlan_membership
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show vlans
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

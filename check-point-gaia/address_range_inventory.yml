@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Address range inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: address_range_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - address_range
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

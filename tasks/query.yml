@@ -1,0 +1,16 @@
+---
+- name: Run the platform query and preserve failures
+  block:
+    - name: Invoke the platform collector
+      ansible.builtin.include_tasks: "adapters/{{ workflow_platform }}.yml"
+      no_log: true
+
+    - name: Append the query result
+      ansible.builtin.set_fact:
+        workflow_results: "{{ workflow_results + [{'query': workflow_query, 'data': workflow_payload}] }}"
+      no_log: true
+  rescue:
+    - name: Record the failed query without exposing vendor output
+      ansible.builtin.set_fact:
+        workflow_failures: "{{ workflow_failures + [workflow_query] }}"
+      no_log: true

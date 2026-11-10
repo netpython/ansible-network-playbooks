@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Interface inventory
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: interface_inventory
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - system_interface
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

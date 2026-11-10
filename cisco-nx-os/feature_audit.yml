@@ -1,0 +1,13 @@
+---
+- name: Cisco NX-OS | Feature audit
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: feature_audit
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show feature
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

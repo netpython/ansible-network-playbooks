@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | System inventory
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: system_inventory
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show system info
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

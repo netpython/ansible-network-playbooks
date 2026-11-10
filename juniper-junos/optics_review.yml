@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Optics review
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: optics_review
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show interfaces diagnostics optics
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

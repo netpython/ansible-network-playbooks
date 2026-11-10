@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS XE | First hop security
+  hosts: ios_xe
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: first_hop_security
+    workflow_platform: cisco-ios-xe
+    workflow_queries:
+    - show ip dhcp snooping binding
+    - show ip arp inspection statistics
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

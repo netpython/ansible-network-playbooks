@@ -1,0 +1,10 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: cisco.ios
+  - name: cisco.nxos
+  - name: junipernetworks.junos
+  - name: arubanetworks.aoscx
+  - name: fortinet.fortios
+  - name: check_point.mgmt
+  - name: paloaltonetworks.panos

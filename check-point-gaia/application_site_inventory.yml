@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Application site inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: application_site_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - application_site
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

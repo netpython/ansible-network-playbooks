@@ -1,0 +1,15 @@
+---
+- name: Aruba AOS-CX | System inventory
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: system_inventory
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show version
+    - show system
+    - show inventory
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

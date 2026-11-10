@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Storage and cores
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: storage_and_cores
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show system storage
+    - show system core-dumps
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

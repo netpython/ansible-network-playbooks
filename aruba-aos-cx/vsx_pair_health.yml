@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Vsx pair health
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vsx_pair_health
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show vsx status
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

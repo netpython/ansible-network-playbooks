@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Spanning tree health
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: spanning_tree_health
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show spanning-tree detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

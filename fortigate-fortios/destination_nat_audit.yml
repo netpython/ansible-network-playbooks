@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Destination nat audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: destination_nat_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - firewall_vip
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

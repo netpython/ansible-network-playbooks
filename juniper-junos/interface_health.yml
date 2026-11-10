@@ -1,0 +1,14 @@
+---
+- name: Juniper Junos | Interface health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: interface_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show interfaces terse
+    - show interfaces descriptions
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

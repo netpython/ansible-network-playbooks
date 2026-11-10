@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Commit job review
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: commit_job_review
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show jobs all
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

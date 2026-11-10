@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Session capacity
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: session_capacity
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show session info
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

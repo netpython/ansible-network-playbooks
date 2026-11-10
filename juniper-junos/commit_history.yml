@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Commit history
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: commit_history
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show system commit
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

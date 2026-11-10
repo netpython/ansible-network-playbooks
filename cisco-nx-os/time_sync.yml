@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Time sync
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: time_sync
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show clock
+    - show ntp peers
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

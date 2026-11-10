@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Security policy audit
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: security_policy_audit
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show running security-policy
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

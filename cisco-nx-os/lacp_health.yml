@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Lacp health
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: lacp_health
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show port-channel summary
+    - show lacp neighbor
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

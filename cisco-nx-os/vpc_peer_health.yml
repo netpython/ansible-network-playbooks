@@ -1,0 +1,14 @@
+---
+- name: Cisco NX-OS | Vpc peer health
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: vpc_peer_health
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show vpc brief
+    - show vpc peer-keepalive
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

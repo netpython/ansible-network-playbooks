@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Static route audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: static_route_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - router_static
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

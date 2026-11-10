@@ -1,0 +1,13 @@
+---
+- name: Cisco NX-OS | Ipv4 bgp summary
+  hosts: nx_os
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ipv4_bgp_summary
+    workflow_platform: cisco-nx-os
+    workflow_queries:
+    - show bgp ipv4 unicast summary
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

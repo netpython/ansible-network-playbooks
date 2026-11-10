@@ -1,0 +1,16 @@
+---
+- name: Run a PAN-OS operational command
+  paloaltonetworks.panos.panos_op:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      api_key: "{{ lookup('ansible.builtin.env', 'PANOS_API_KEY', default=undef()) }}"
+    cmd: "{{ workflow_query }}"
+    vsys: "{{ panos_vsys | default('vsys1') }}"
+  register: vendor_result
+  changed_when: false
+  no_log: true
+
+- name: Retain the operational output
+  ansible.builtin.set_fact:
+    workflow_payload: "{{ vendor_result.stdout }}"
+  no_log: true

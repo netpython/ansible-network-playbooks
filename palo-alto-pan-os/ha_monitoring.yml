@@ -1,0 +1,14 @@
+---
+- name: Palo Alto PAN-OS | Ha monitoring
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ha_monitoring
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show high-availability link-monitoring
+    - show high-availability path-monitoring
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

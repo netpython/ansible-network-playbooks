@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Access layer inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: access_layer_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - access_layer
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

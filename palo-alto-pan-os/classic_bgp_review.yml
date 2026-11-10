@@ -1,0 +1,13 @@
+---
+- name: Palo Alto PAN-OS | Classic bgp review
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: classic_bgp_review
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show routing protocol bgp summary
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

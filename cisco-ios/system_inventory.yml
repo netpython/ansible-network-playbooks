@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | System inventory
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: system_inventory
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show version
+    - show inventory
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

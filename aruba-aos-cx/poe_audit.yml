@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Poe audit
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: poe_audit
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show power-over-ethernet brief
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

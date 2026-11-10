@@ -1,0 +1,13 @@
+---
+- name: Cisco IOS | Poe audit
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: poe_audit
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show power inline
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

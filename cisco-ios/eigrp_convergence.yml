@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Eigrp convergence
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: eigrp_convergence
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show ip eigrp neighbors
+    - show ip eigrp topology
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

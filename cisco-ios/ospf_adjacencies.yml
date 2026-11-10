@@ -1,0 +1,14 @@
+---
+- name: Cisco IOS | Ospf adjacencies
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ospf_adjacencies
+    workflow_platform: cisco-ios
+    workflow_queries:
+    - show ip ospf neighbor
+    - show ip ospf interface brief
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

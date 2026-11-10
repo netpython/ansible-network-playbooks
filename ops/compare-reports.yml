@@ -1,0 +1,50 @@
+---
+- name: Compare two complete reports for the same workflow and device
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    before_report: "{{ lookup('ansible.builtin.file', baseline_path) | from_json }}"
+    after_report: "{{ lookup('ansible.builtin.file', current_path) | from_json }}"
+  tasks:
+    - name: Require report paths
+      ansible.builtin.assert:
+        that:
+          - baseline_path is defined
+          - current_path is defined
+        quiet: true
+
+    - name: Verify that both inputs can be compared
+      ansible.builtin.assert:
+        that:
+          - before_report.schema == 1
+          - after_report.schema == 1
+          - before_report.status == 'complete'
+          - after_report.status == 'complete'
+          - before_report.device == after_report.device
+          - before_report.platform == after_report.platform
+          - before_report.workflow == after_report.workflow
+          - before_report.results | map(attribute='query') | list == after_report.results | map(attribute='query') | list
+        quiet: true
+      no_log: true
+
+    - name: Initialize changed query names
+      ansible.builtin.set_fact:
+        changed_queries: []
+
+    - name: Compare query data without exposing its contents
+      ansible.builtin.set_fact:
+        changed_queries: "{{ changed_queries + [item.0.query] }}"
+      loop: "{{ before_report.results | zip(after_report.results) | list }}"
+      when: item.0.data != item.1.data
+      no_log: true
+
+    - name: Summarize snapshot differences
+      ansible.builtin.debug:
+        var: changed_queries
+
+    - name: Optionally fail on any difference
+      ansible.builtin.assert:
+        that: changed_queries | length == 0
+        quiet: true
+      when: fail_on_drift | default(false) | bool

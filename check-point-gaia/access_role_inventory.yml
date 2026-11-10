@@ -1,0 +1,13 @@
+---
+- name: Check Point Management API | Access role inventory
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: access_role_inventory
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - access_role
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

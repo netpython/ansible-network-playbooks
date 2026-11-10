@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Mpls lsp health
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: mpls_lsp_health
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show mpls lsp extensive
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

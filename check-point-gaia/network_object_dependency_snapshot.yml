@@ -1,0 +1,16 @@
+---
+- name: Check Point Management API | Network object dependency snapshot
+  hosts: checkpoint
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: network_object_dependency_snapshot
+    workflow_platform: check-point-gaia
+    workflow_queries:
+    - host
+    - network
+    - address_range
+    - group
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

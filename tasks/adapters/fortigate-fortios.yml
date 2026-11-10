@@ -1,0 +1,23 @@
+---
+- name: Retrieve FortiOS configuration facts
+  fortinet.fortios.fortios_configuration_fact:
+    vdom: "{{ fortios_vdom | default('root') }}"
+    access_token: "{{ lookup('ansible.builtin.env', 'FORTIOS_TOKEN', default=undef()) }}"
+    selector: "{{ workflow_query }}"
+  register: vendor_result
+  changed_when: false
+  ignore_unreachable: true
+  no_log: true
+
+- name: Verify FortiGate was reachable
+  ansible.builtin.assert:
+    that:
+      - not (vendor_result.unreachable | default(false))
+      - vendor_result.meta is defined or vendor_result.results is defined
+    quiet: true
+  no_log: true
+
+- name: Retain the API metadata and data
+  ansible.builtin.set_fact:
+    workflow_payload: "{{ vendor_result.meta | default(vendor_result.results) }}"
+  no_log: true

@@ -1,0 +1,13 @@
+---
+- name: Juniper Junos | Isis adjacencies
+  hosts: junos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: isis_adjacencies
+    workflow_platform: juniper-junos
+    workflow_queries:
+    - show isis adjacency detail
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

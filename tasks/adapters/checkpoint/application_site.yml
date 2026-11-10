@@ -1,0 +1,10 @@
+---
+- name: Read Check Point application site objects
+  check_point.mgmt.cp_mgmt_application_site_facts:
+    details_level: standard
+    limit: '{{ checkpoint_limit | default(50) | int }}'
+    offset: '{{ checkpoint_offset | default(0) | int }}'
+  register: vendor_result
+  changed_when: false
+  ignore_unreachable: true
+  no_log: true

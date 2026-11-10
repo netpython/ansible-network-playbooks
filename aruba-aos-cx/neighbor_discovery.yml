@@ -1,0 +1,13 @@
+---
+- name: Aruba AOS-CX | Neighbor discovery
+  hosts: aruba
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: neighbor_discovery
+    workflow_platform: aruba-aos-cx
+    workflow_queries:
+    - show lldp neighbor-info
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

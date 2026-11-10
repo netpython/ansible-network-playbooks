@@ -1,0 +1,14 @@
+---
+- name: Palo Alto PAN-OS | Ha state
+  hosts: panos
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: ha_state
+    workflow_platform: palo-alto-pan-os
+    workflow_queries:
+    - show high-availability state
+    - show high-availability state-synchronization
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

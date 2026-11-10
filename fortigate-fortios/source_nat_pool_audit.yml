@@ -1,0 +1,13 @@
+---
+- name: FortiGate / FortiOS | Source nat pool audit
+  hosts: fortios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: source_nat_pool_audit
+    workflow_platform: fortigate-fortios
+    workflow_queries:
+    - firewall_ippool
+  tasks:
+  - name: Collect and save evidence
+    ansible.builtin.import_tasks: ../tasks/collect.yml

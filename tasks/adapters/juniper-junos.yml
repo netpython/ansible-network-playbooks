@@ -1,0 +1,24 @@
+---
+- name: Run a read-only operational command
+  junipernetworks.junos.junos_command:
+    commands:
+    - '{{ workflow_query }}'
+    display: text
+  register: vendor_result
+  changed_when: false
+  ignore_unreachable: true
+  no_log: true
+- name: Reject connection failures and CLI error output
+  ansible.builtin.assert:
+    that:
+    - not (vendor_result.unreachable | default(false))
+    - vendor_result.stdout is defined
+    - vendor_result.stdout | length == 1
+    - not (vendor_result.stdout[0] is search('(?im)^\s*(%\s*(invalid input|ambiguous command|incomplete command|authorization
+      failed|unrecognized command)|syntax error|invalid command)'))
+    quiet: true
+  no_log: true
+- name: Retain CLI output
+  ansible.builtin.set_fact:
+    workflow_payload: '{{ vendor_result.stdout[0] }}'
+  no_log: true
