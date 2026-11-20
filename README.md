@@ -1,16 +1,16 @@
 # Ansible Network Playbooks
 
-**160 read-only playbooks for network operations across eight platforms.**
+**161 read-only playbooks for network operations across eight platforms.**
 
 Collect inventory, inspect protocol state, review firewall policy and capture evidence for a change window. Each playbook targets a named inventory group and saves a separate JSON report per device on the controller.
 
-`Ansible Core` · `Network CLI / NETCONF / API` · `160 platform playbooks`
+`Ansible Core` · `Network CLI / NETCONF / API` · `161 platform playbooks`
 
 ## Pick a platform
 
 | Platform | Playbooks | Inventory group | Connection |
 | --- | ---: | --- | --- |
-| [Cisco IOS](cisco-ios/README.md) | 20 | `ios` | `ansible.netcommon.network_cli` |
+| [Cisco IOS](cisco-ios/README.md) | 21 | `ios` | `ansible.netcommon.network_cli` |
 | [Cisco IOS XE](cisco-ios-xe/README.md) | 20 | `ios_xe` | `ansible.netcommon.network_cli` |
 | [Cisco NX-OS](cisco-nx-os/README.md) | 20 | `nx_os` | `ansible.netcommon.network_cli` |
 | [Juniper Junos](juniper-junos/README.md) | 20 | `junos` | `ansible.netcommon.netconf` |

@@ -1,0 +1,36 @@
+name: DHCP audit syntax
+on:
+  pull_request:
+    paths:
+      - 'cisco-ios/dhcp_server_audit.yml'
+      - 'tasks/**'
+      - 'inventories/lab/hosts.yml'
+      - '.github/workflows/dhcp-audit-syntax.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'cisco-ios/dhcp_server_audit.yml'
+      - 'tasks/**'
+      - 'inventories/lab/hosts.yml'
+      - '.github/workflows/dhcp-audit-syntax.yml'
+permissions:
+  contents: read
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install controller and IOS collections
+        run: |
+          python -m pip install 'ansible-core>=2.17,<2.20'
+          ansible-galaxy collection install cisco.ios ansible.netcommon
+      - name: Check syntax without contacting devices
+        run: ansible-playbook -i inventories/lab/hosts.yml cisco-ios/dhcp_server_audit.yml --syntax-check
+      - name: Verify example target selection without connecting
+        run: ansible-playbook -i inventories/lab/hosts.yml cisco-ios/dhcp_server_audit.yml --list-hosts --limit ios-lab

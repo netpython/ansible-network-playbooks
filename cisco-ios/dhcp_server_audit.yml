@@ -1,0 +1,16 @@
+---
+- name: Cisco IOS | DHCP server evidence
+  hosts: ios
+  gather_facts: false
+  serial: 5
+  vars:
+    workflow_id: dhcp_server_audit
+    workflow_platform: cisco-ios
+    workflow_queries:
+      - show ip dhcp pool
+      - show ip dhcp binding
+      - show ip dhcp conflict
+      - show ip dhcp server statistics
+  tasks:
+    - name: Collect and save evidence
+      ansible.builtin.import_tasks: ../tasks/collect.yml

@@ -30,3 +30,6 @@ ansible-playbook -i inventories/local/hosts.yml cisco-ios/system_inventory.yml -
 | [Eigrp convergence](eigrp_convergence.yml) | `show ip eigrp neighbors`<br>`show ip eigrp topology` |
 | [Nat health](nat_health.yml) | `show ip nat statistics`<br>`show ip nat translations` |
 | [Configuration backup](configuration_backup.yml) | `show running-config` |
+| [DHCP server audit](dhcp_server_audit.yml) | `show ip dhcp pool`<br>`show ip dhcp binding`<br>`show ip dhcp conflict`<br>`show ip dhcp server statistics` |
+
+See [DHCP audit usage and limits](../docs/dhcp-server-audit.md) before running this workflow.
